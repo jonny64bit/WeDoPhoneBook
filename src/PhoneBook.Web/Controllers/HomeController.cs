@@ -1,7 +1,11 @@
 ﻿using System.Diagnostics;
+using AutoMapper;
+using System.Drawing;
 using Microsoft.AspNetCore.Mvc;
 using PhoneBook.Base.Interfaces;
 using PhoneBook.Web.Models;
+using Microsoft.EntityFrameworkCore;
+using AutoMapper.QueryableExtensions;
 
 namespace PhoneBook.Web.Controllers;
 
@@ -13,15 +17,16 @@ public class HomeController : BaseController
 
     public IActionResult Index()
     {
-        //TODO remove...
-        var count = this.Service.Context.Contacts.Count();
-
         return View();
     }
 
-    public IActionResult Privacy()
+    public async Task<JsonResult> Read(string? search)
     {
-        return View();
+        var query = Service.Context.Contacts.Where(x => !x.SoftDelete);
+        if (!string.IsNullOrWhiteSpace(search))
+            query = query.Where(x =>x.LastName != null && x.LastName.Contains(search));
+        var items = await query.OrderBy(x => x.LastName).ProjectTo<ContactGridItem>(Service.Mapper.ConfigurationProvider).ToListAsync();
+        return new JsonResult(new { Result = "OK", Records = items });
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

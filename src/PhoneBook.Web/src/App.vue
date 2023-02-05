@@ -1,48 +1,21 @@
 <script setup lang="ts">
-//import HelloWorld from './components/HelloWorld.vue'
-//import TheWelcome from './components/TheWelcome.vue'
+import Grid from './components/Grid.vue'
 </script>
 
 <template>
-  <header>
-    
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-      <p>cake!</p>
+  <header class="row">
+    <div class="col">
+      <h1 class="text-center mt-2 mb-4">
+        <font-awesome-icon icon="fa-regular fa-contact-book" />
+        Phone Book App
+      </h1>
     </div>
   </header>
-
   <main>
-    <TheWelcome />
+    <Grid />
   </main>
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
-}
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
 </style>
