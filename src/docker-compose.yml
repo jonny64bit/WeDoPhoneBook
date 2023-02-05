@@ -1,0 +1,27 @@
+version: '3.4'
+
+services:
+  phonebook.web:
+    image: ${DOCKER_REGISTRY-}phonebookweb
+    build:
+      context: .
+      dockerfile: PhoneBook.Web/Dockerfile
+    depends_on:
+      - mssql
+    networks: 
+      - phonebook
+
+  mssql:
+    container_name: phonebook.mssql
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    ports:
+      - "1433:1433"
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=SqlServer2022
+    networks: 
+      - phonebook
+
+networks:
+  phonebook:
+    driver: bridge
