@@ -3,6 +3,11 @@ name: test
 on:
   [push, pull_request]
 
+permissions:
+  id-token: write
+  contents: read
+  checks: write
+
 jobs:
   test-dotnet:
     name: test dotnet
