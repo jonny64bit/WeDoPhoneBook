@@ -21,15 +21,15 @@ jobs:
            dotnet-version: '7.0.x'
         
       - name: Restore
-        run: dotnet restore
+        run: dotnet restore WeDoPhoneBook.sln
         working-directory: ./src
         
       - name: Build
-        run: dotnet build -c Debug --no-restore
+        run: dotnet build WeDoPhoneBook.sln -c Debug --no-restore
         working-directory: ./src
        
       - name: Test
-        run: dotnet test -c Debug --no-restore --logger "trx;LogFileName=test-results.trx"
+        run: dotnet test WeDoPhoneBook.sln -c Debug --no-restore --logger "trx;LogFileName=test-results.trx"
         working-directory: ./src
         
       - name: Report Results
