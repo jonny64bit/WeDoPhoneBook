@@ -8,8 +8,8 @@ namespace PhoneBook.Web.Helpers
     {
         public AutoMapperProfile()
         {
-            CreateMap<Contact, ContactGridItem>()
-                .ForMember(x=>x.Name, x=>x.MapFrom(c=>c.FirstName + " " + c.LastName));
+            CreateMap<Contact, ContactGridItem>();
+            CreateMap<ContactEditModel, Contact>();
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace PhoneBook.Web.Models
 {
-    public class ContactGridItem
+    public class ContactEditModel
     {
         public int Id { get; set; }
         public string? FirstName { get; set; }
