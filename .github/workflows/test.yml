@@ -7,9 +7,6 @@ jobs:
   test-dotnet:
     name: test dotnet
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: src
     steps:
       - name: Set environment variables
         run: |
@@ -25,17 +22,20 @@ jobs:
         
       - name: Restore
         run: dotnet restore
+        working-directory: ./src
         
       - name: Build
         run: dotnet build -c Debug --no-restore
+        working-directory: ./src
        
       - name: Test
         run: dotnet test -c Debug --no-restore --logger "trx;LogFileName=test-results.trx"
+        working-directory: ./src
         
       - name: Report Results
         uses: dorny/test-reporter@v1
         if: success() || failure()
         with:
           name: .NET Results
-          path: ./**/*.trx
+          path: src/**/*.trx
           reporter: dotnet-trx
