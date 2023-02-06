@@ -15,6 +15,6 @@ public class BaseController : Controller
         Service = service;
     }
 
-    protected JsonResult JsonOK() => new JsonResult(new { Result = "OK" });
+    protected JsonResult JsonOK() => Json(new GeneralJsonMessage<string> { Result = "OK", Detail = "" });
     protected JsonResult JsonErrorMessage(string message) => Json(new GeneralJsonMessage<string> {Result = "FAIL", Detail = message});
 }
